@@ -19,9 +19,9 @@ Carga e instalación de librerías y datos.
 
 
 ```R
-devtools::install_github("JBGruber/rwhatsapp")
+#devtools::install_github("JBGruber/rwhatsapp")
 library(tidyverse) 
-library(rwhatsapp)
+library(rwhatsapp, lib="C:/R")
 library(wordcloud)
 library(stringr)
 library(tm)
@@ -32,128 +32,62 @@ library(tidytext)
 library(stopwords)
 ```
 
-    Downloading GitHub repo JBGruber/rwhatsapp@master
-    
-
-    
-    v  checking for file 'C:\Users\Andrés\AppData\Local\Temp\Rtmp4oElBk\remotes10ac62453285\JBGruber-rwhatsapp-b05eb75/DESCRIPTION' (859ms)
-    -  preparing 'rwhatsapp':
-    v  checking DESCRIPTION meta-information ... 
-    -  checking for LF line-endings in source and make files and shell scripts
-    -  checking for empty or unneeded directories
-    -  looking to see if a 'data/datalist' file should be added
-    -  building 'rwhatsapp_0.1.3.9000.tar.gz'
-       
-    
-
-    Installing package into 'C:/Users/Andrés/Documents/R/win-library/3.5'
-    (as 'lib' is unspecified)
-    
+    Warning message:
+    "package 'emojifont' was built under R version 3.5.3"
 
 
-    Error in i.p(...): (converted from warning) installation of package 'C:/Users/ANDRS~1/AppData/Local/Temp/Rtmp4oElBk/file10ac5cfc2637/rwhatsapp_0.1.3.9000.tar.gz' had non-zero exit status
+    Error: package or namespace load failed for 'emojifont':
+     .onLoad failed in loadNamespace() for 'sysfonts', details:
+      call: font_add("sans", sans.r, sans.b, sans.i, sans.bi, NULL)
+      error: freetype: cannot open resource, error code 1
     Traceback:
     
 
-    1. devtools::install_github("JBGruber/rwhatsapp")
+    1. library(emojifont)
 
-    2. install_remotes(remotes, auth_token = auth_token, host = host, 
-     .     dependencies = dependencies, upgrade = upgrade, force = force, 
-     .     quiet = quiet, build = build, build_opts = build_opts, repos = repos, 
-     .     type = type, ...)
+    2. tryCatch({
+     .     attr(package, "LibPath") <- which.lib.loc
+     .     ns <- loadNamespace(package, lib.loc)
+     .     env <- attachNamespace(ns, pos = pos, deps)
+     . }, error = function(e) {
+     .     P <- if (!is.null(cc <- conditionCall(e))) 
+     .         paste(" in", deparse(cc)[1L])
+     .     else ""
+     .     msg <- gettextf("package or namespace load failed for %s%s:\n %s", 
+     .         sQuote(package), P, conditionMessage(e))
+     .     if (logical.return) 
+     .         message(paste("Error:", msg), domain = NA)
+     .     else stop(msg, call. = FALSE, domain = NA)
+     . })
 
-    3. vapply(remotes, install_remote, ..., FUN.VALUE = character(1))
+    3. tryCatchList(expr, classes, parentenv, handlers)
 
-    4. FUN(X[[i]], ...)
+    4. tryCatchOne(expr, names, parentenv, handlers[[1L]])
 
-    5. install(source, dependencies = dependencies, upgrade = upgrade, 
-     .     force = force, quiet = quiet, build = build, build_opts = build_opts, 
-     .     repos = repos, type = type, ...)
+    5. value[[3L]](cond)
 
-    6. safe_install_packages(pkgdir, repos = NULL, quiet = quiet, type = "source", 
-     .     ...)
-
-    7. with_envvar(c(R_LIBS = lib, R_LIBS_USER = lib, R_LIBS_SITE = lib), 
-     .     if (should_error_for_warnings()) {
-     .         with_options(list(warn = 2), with_rprofile_user("options(warn = 2)", 
-     .             i.p(...)))
-     .     } else {
-     .         i.p(...)
-     .     })
-
-    8. force(code)
-
-    9. with_options(list(warn = 2), with_rprofile_user("options(warn = 2)", 
-     .     i.p(...)))
-
-    10. force(code)
-
-    11. with_rprofile_user("options(warn = 2)", i.p(...))
-
-    12. with_envvar(c(R_PROFILE_USER = temp_rprofile), {
-      .     force(code)
-      . })
-
-    13. force(code)
-
-    14. force(code)
-
-    15. i.p(...)
-
-    16. warning(gettextf("installation of package %s had non-zero exit status", 
-      .     sQuote(update[i, 1L])), domain = NA)
-
-    17. .signalSimpleWarning("installation of package 'C:/Users/ANDRS~1/AppData/Local/Temp/Rtmp4oElBk/file10ac5cfc2637/rwhatsapp_0.1.3.9000.tar.gz' had non-zero exit status", 
-      .     quote(i.p(...)))
-
-    18. withRestarts({
-      .     .Internal(.signalCondition(simpleWarning(msg, call), msg, 
-      .         call))
-      .     .Internal(.dfltWarn(msg, call))
-      . }, muffleWarning = function() NULL)
-
-    19. withOneRestart(expr, restarts[[1L]])
-
-    20. doWithOneRestart(return(expr), restart)
+    6. stop(msg, call. = FALSE, domain = NA)
 
 
 
 ```R
-library(rwhatsapp)
-base <- rwa_read("https://raw.githubusercontent.com/Manamaster/analisisWhatsApp/master/chatWA.txt")
+base <- rwa_read("C:/DataScience08012019/whatsapp/data/chatWA.txt")
 head(base)
 ```
 
 
-    `by` can't contain join column `emoji` which is missing from LHSTraceback:
-    
+<table>
+<thead><tr><th scope=col>time</th><th scope=col>author</th><th scope=col>text</th><th scope=col>emoji</th><th scope=col>emoji_name</th></tr></thead>
+<tbody>
+	<tr><td>2019-03-14 13:56:16                                                                                                                                                                                                                                                                                                                                  </td><td><span style=white-space:pre-wrap>Networking BTL &amp; Mkt              </span>                                                                                                                                                                                                                                                                       </td><td><span style=white-space:pre-wrap>&lt;U+200E&gt;Los mensajes en este grupo ahora están protegidos con cifrado de extremo a extremo.                                                                                                                                                                                                            </span></td><td>                                                                                                                                                                                                                                                                                                                                                     </td><td>                                                                                                                                                                                                                                                                                                                                                     </td></tr>
+	<tr><td>2019-03-14 13:56:16                                                                                                                                                                                                                                                                                                                                              </td><td><span style=white-space:pre-wrap>NA                                </span>                                                                                                                                                                                                                                                                                       </td><td><span style=white-space:pre-wrap>&lt;U+200E&gt;&lt;U+202A&gt;+52 1 55 3100 5236&lt;U+202C&gt; creó este grupo                                                                                                                                                                                                                                             </span></td><td>                                                                                                                                                                                                                                                                                                                                                                 </td><td>                                                                                                                                                                                                                                                                                                                                                                 </td></tr>
+	<tr><td>2019-03-14 14:15:31                                                                                                                                                                                                                                                                                                                                              </td><td><span style=white-space:pre-wrap>NA                                </span>                                                                                                                                                                                                                                                                                       </td><td><span style=white-space:pre-wrap>&lt;U+200E&gt;&lt;U+202A&gt;+52 1 55 3100 5236&lt;U+202C&gt; te añadió                                                                                                                                                                                                                                                   </span></td><td>                                                                                                                                                                                                                                                                                                                                                                 </td><td>                                                                                                                                                                                                                                                                                                                                                                 </td></tr>
+	<tr><td>2019-03-14 14:16:43                                                                                                                                                                                                                                                                                                                            </td><td>&lt;U+202A&gt;+52 1 55 1333 1488&lt;U+202C&gt;                                                                                                                                                                                                                                                                                                 </td><td><span style=white-space:pre-wrap>Hola a todos y gracias Giovana. Soy Lizeth Guerrero,  actualmente estamos en búsqueda en la agencia de un Campaign Specialist de Google Ads, alguien que opere algunos de nuestros clientes y optimice campañas,  si saben de alguien porfa avisenme, gracias                                          </span></td><td>                                                                                                                                                                                                                                                                                                                                               </td><td>                                                                                                                                                                                                                                                                                                                                               </td></tr>
+	<tr><td>2019-03-14 14:19:25                                                                                                                                                                                                                                                                                                                                                          </td><td><span style=white-space:pre-wrap>NA                                </span>                                                                                                                                                                                                                                                                                                   </td><td><span style=white-space:pre-wrap>&lt;U+200E&gt;&lt;U+202A&gt;+52 1 55 3100 5236&lt;U+202C&gt; añadió a &lt;U+202A&gt;+52 1 55 5075 7577&lt;U+202C&gt;                                                                                                                                                                                                                 </span></td><td>                                                                                                                                                                                                                                                                                                                                                                             </td><td>                                                                                                                                                                                                                                                                                                                                                                             </td></tr>
+	<tr><td>2019-03-14 14:20:57                                                                                                                                                                                                                                                                                    </td><td>&lt;U+202A&gt;+52 1 81 8252 7465&lt;U+202C&gt;                                                                                                                                                                                                                                                         </td><td>Hola a todos, buena tarde. Soy Carlos Rodríguez, asesor y consultor de medios para Grupo Multimedios, Grupo Milenio y Grupo Pol. Vendo medios, asesoro marcas y creo campañas para todas las plataformas de la empresa para la que trabajo. Estoy en Monterrey pero puedo ver clientes de todo el país.</td><td>                                                                                                                                                                                                                                                                                                       </td><td>                                                                                                                                                                                                                                                                                                       </td></tr>
+</tbody>
+</table>
 
-    1. rwa_read("https://raw.githubusercontent.com/Manamaster/analisisWhatsApp/master/WhatsAppChatArkha.txt")
-
-    2. dplyr::bind_cols(tbl, rwa_add_emoji(tbl))
-
-    3. flatten_bindable(dots_values(...))
-
-    4. dots_values(...)
-
-    5. rwa_add_emoji(tbl)
-
-    6. dplyr::left_join(out, rwhatsapp::emojis, by = "emoji")
-
-    7. left_join.tbl_df(out, rwhatsapp::emojis, by = "emoji")
-
-    8. common_by(by, x, y)
-
-    9. common_by.character(by, x, y)
-
-    10. common_by.list(by, x, y)
-
-    11. bad_args("by", "can't contain join column {missing} which is missing from LHS", 
-      .     missing = fmt_obj(setdiff(by$x, x_vars)))
-
-    12. glubort(fmt_args(args), ..., .envir = .envir)
-
-    13. .abort(text)
 
 
 ## Se prepara el texto para su posterior análisis.
@@ -170,6 +104,15 @@ Se reemplazan los caracteres acentuados con vocales.
 ```R
 base$text <- chartr('ÁÉÍÓÚ', 'AEIOU', base$text)
 ```
+
+
+    Error in chartr("ÁÉÍÓÚ", "AEIOU", base$text): invalid input 'GRACIAS GIO ðŸ˜ƒí ½ - INGENIA MEDIOS
+    PUBLICIDAD EXTERIOR, MEDIOS MOVILES, MANEJO DE SOCIAL MEDIA.' in 'utf8towcs'
+    Traceback:
+    
+
+    1. chartr("ÁÉÍÓÚ", "AEIOU", base$text)
+
 
 Se remueven las palabras innecesarias, puntuación, espacios en blanco y los mensajes de que se omitió el archivo adjunto cuando se exportó el chat.<br>(En caso de que en la conversación se encuentren otros tipos de risa, se pueden agregar a la lista usando ' ')
 
@@ -195,6 +138,10 @@ base <- base %>%
 length(unique(base$author))
 ```
 
+
+187
+
+
 Generación de un Top 10 de los participantes del chat.<br>
 Se verifica que la columna "author" no esté vacía, se agrupa por autor, se sumariza y se acomodan los autores con estos estándares. <br>
 Se unen las dos bases, la original y la generada en el paso anterior para formar una nueva.
@@ -214,6 +161,10 @@ base_3 <- base_3 %>%
 length(unique(base_3$author))
 ```
 
+
+11
+
+
 ## Visualización de la información
 Graficación de los mensajes por día.
 
@@ -229,6 +180,10 @@ base %>%
         axis.title.y = element_blank())
 ```
 
+
+![png](output_16_0.png)
+
+
 Gráfica de los mensajes por autor.
 
 
@@ -241,6 +196,10 @@ base_3 %>%
   ggtitle("Mensajes por autor") +
   coord_flip()
 ```
+
+
+![png](output_18_0.png)
+
 
 Gráfica de los emoji más utilizados dentro de la conversación
 
@@ -263,11 +222,17 @@ base_3 %>%
 
 ```
 
+    Selecting by n
+    
+
+
+![png](output_20_1.png)
+
+
 Las palabras más utilizadas (favoritas) por integrantes de la conversación.
 
 
 ```R
-
 base_3 %>% 
   unnest_tokens(input = "text",
                 output = "word") %>%
@@ -289,10 +254,18 @@ base_3 %>%
   xlab("") +
   coord_flip() +
   facet_wrap(~author, ncol = 2, scales = "free_y") +
-  ggtitle("Most often used words") +
+  ggtitle("Palabras más usadas") +
   theme_bw()
 
+
 ```
+
+    Selecting by n
+    
+
+
+![png](output_22_1.png)
+
 
 Días en los que hubo una mayor cantidad de mensajes.
 
@@ -313,6 +286,10 @@ base %>%
   theme_bw()
 
 ```
+
+
+![png](output_24_0.png)
+
 
 Información sobre los tipos de documentos adjuntos y la frecuencia con la que son enviados. <br>
 Primero se crea una nueva columna dentro de la tabla para que, de acuerdo con los datos que detecta usando la función str_detect, marque el archivo adjunto con su extensión en la columna recién creada.
@@ -349,6 +326,10 @@ base_4 %>%
 ```
 
 
+![png](output_26_0.png)
+
+
+
 ```R
 base_4 %>% 
   group_by(file) %>% 
@@ -361,3 +342,7 @@ base_4 %>%
   ggtitle("Cantidad de archivos por tipo.") +
   theme_bw()
 ```
+
+
+![png](output_27_0.png)
+
